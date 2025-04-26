@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
-import BackButton from '../components/BackButton';
+import BackButton from '../components/BackButton'
 import '../pages/Productlist.scss'
 import rugImg from '../assets/images/table_rug.jpg'
 import plantsImg from '../assets/images/plants.jpg'
 import booksImg from '../assets/images/books.jpg'
+import Navigation from '../components/Navigation'
+import './Pages.scss'
 
 function Productlist() {
 
@@ -60,41 +62,44 @@ function Productlist() {
 
 
   return (
-    <div className="product-list">
-      <div className="product-list__header">
-        < BackButton />
-        <div>
-          <select 
-            id="tag-filter"
-            value={selectedTag}
-            onChange={(e) => setSelectedTag(e.target.value)}
-            className="tag-select"
-            >
-            {uniqueTags.map(tag => (
-              <option key={tag} value={tag}>
-                {tag.charAt(0).toUpperCase() + tag.slice(1)}
-              </option>
-            ))}
-          </select>
+    <div className="page page--product-list">
+      < Navigation />
+      <div className="product-list">
+        <div className="product-list__header">
+          < BackButton />
+          <div>
+            <select 
+              id="tag-filter"
+              value={selectedTag}
+              onChange={(e) => setSelectedTag(e.target.value)}
+              className="tag-select"
+              >
+              {uniqueTags.map(tag => (
+                <option key={tag} value={tag}>
+                  {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
-      <div className="product-list__container">
-        {filteredProducts.map((product) => (
-          <Link 
-            to={`/product/${product.id}`} 
-            key={product.id}
-            state={{ product }}
-          >
-            <ProductCard 
-              id={product.id}
-              url={product.url}
-              alt={product.alt}
-              name={product.name}
-              price={product.price}
-              tags={product.tags}
-            />
-          </Link>
-        ))}
+        <div className="product-list__container">
+          {filteredProducts.map((product) => (
+            <Link 
+              to={`/product/${product.id}`} 
+              key={product.id}
+              state={{ product }}
+            >
+              <ProductCard 
+                id={product.id}
+                url={product.url}
+                alt={product.alt}
+                name={product.name}
+                price={product.price}
+                tags={product.tags}
+              />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )
