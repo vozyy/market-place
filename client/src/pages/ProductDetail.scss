@@ -1,0 +1,68 @@
+.product-detail {
+    padding: 1rem;
+    display: flex;
+    column-gap: 1rem;
+    .product-image {
+        border-radius: 12px;
+        aspect-ratio: 1 / 1;
+        max-width: 50%;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        position: relative;
+        // toto iba na velkych desktopoch
+        // max-height: calc(100vh - 2rem);
+    }
+    .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.487);
+        transition: background-color 0.3s ease, width 0.3s ease;
+        img {
+            width: 50px;
+        }
+        .back-text {
+            visibility: hidden;
+            opacity: 0;
+            transform: translateX(-10px);
+            padding-right: .7rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        &:hover {
+            width: auto;
+            height: auto;
+            border-radius: 24px;
+            background-color: white;
+            .back-text {
+                visibility: visible;
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
+    &__text {
+        width: 30%;
+        h1 {
+            margin-bottom: .5rem;
+        }
+        .seller-detail {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .action-button {
+            margin-top: 2rem;
+            button {
+                border-radius: 8px;
+                background-color: red;
+                padding: .5rem 1.2rem;
+            }
+        }
+    }
+}
