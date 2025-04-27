@@ -17,7 +17,7 @@ function ProductDetail() {
   return (
     <div className="product-detail">
       <img src={product.url} alt={product.alt} className='product-image'/>
-      < BackButton />
+      < BackButton variant="overlay" />
       <div className='product-detail__text'>
         <h1>{product.name}</h1>
         <p>{product.description}</p>
