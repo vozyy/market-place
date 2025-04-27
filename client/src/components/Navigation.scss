@@ -1,9 +1,11 @@
 .navigation {
-    border: 2px solid red;
-    height: 100vh;
-    ul {
-        li {
-            padding: 1rem;
+    &--vertical {
+        width: 150px;
+        height: 100vh;
+        ul {
+            li {
+                padding: 1rem;
+            }
         }
     }
 }
