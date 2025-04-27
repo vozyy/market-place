@@ -6,11 +6,8 @@
             max-width: 80%;
             margin: 0 auto;
             &__header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                place-self: end;
                 padding-block: 1rem;
-
                 label[for="tag-filter"] {
                     font-size: 16px;
                     font-weight: 500;
