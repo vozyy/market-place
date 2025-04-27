@@ -7,7 +7,6 @@ import rugImg from '../assets/images/table_rug.jpg'
 import plantsImg from '../assets/images/plants.jpg'
 import booksImg from '../assets/images/books.jpg'
 import Navigation from '../components/Navigation'
-import './Pages.scss'
 
 function Productlist() {
 
@@ -62,11 +61,9 @@ function Productlist() {
 
 
   return (
-    <div className="page page--product-list">
-      < Navigation />
+    <div className='page page--product-list'>
       <div className="product-list">
         <div className="product-list__header">
-          < BackButton />
           <div>
             <select 
               id="tag-filter"
@@ -101,6 +98,7 @@ function Productlist() {
           ))}
         </div>
       </div>
+      < Navigation variant="vertical" />
     </div>
   )
 }
