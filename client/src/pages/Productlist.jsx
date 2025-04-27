@@ -64,20 +64,18 @@ function Productlist() {
     <div className='page page--product-list'>
       <div className="product-list">
         <div className="product-list__header">
-          <div>
-            <select 
-              id="tag-filter"
-              value={selectedTag}
-              onChange={(e) => setSelectedTag(e.target.value)}
-              className="tag-select"
-              >
-              {uniqueTags.map(tag => (
-                <option key={tag} value={tag}>
-                  {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select 
+            id="tag-filter"
+            value={selectedTag}
+            onChange={(e) => setSelectedTag(e.target.value)}
+            className="tag-select"
+            >
+            {uniqueTags.map(tag => (
+              <option key={tag} value={tag}>
+                {tag.charAt(0).toUpperCase() + tag.slice(1)}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="product-list__container">
           {filteredProducts.map((product) => (
