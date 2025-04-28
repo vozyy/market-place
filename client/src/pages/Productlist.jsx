@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import usePagination from '../hooks/usePagination'
 import ProductCard from '../components/ProductCard'
-import BackButton from '../components/BackButton'
 import '../pages/Productlist.scss'
 import rugImg from '../assets/images/table_rug.jpg'
 import plantsImg from '../assets/images/plants.jpg'
@@ -11,6 +11,13 @@ import Navigation from '../components/Navigation'
 function Productlist() {
 
   const [selectedTag, setSelectedTag] = useState('all');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageParam = Number(searchParams.get('page') || 1);
+
+  useEffect(() => {
+    setSearchParams({ page: '1' });
+  }, [selectedTag]);
+
 
   const products = [
     { 
@@ -48,7 +55,43 @@ function Productlist() {
         phone: '+421444444444',
         email: 'csilla@test.com',
         seller_name: 'Csilla'
-    }
+    },
+    { 
+        id: 124, 
+        url: booksImg,
+        alt: 'books', 
+        name: 'stuff1', 
+        description: 'Im selling my book collection for a penny' ,
+        price: 1,
+        tags: ['relax', 'books'],
+        phone: '+421444444444',
+        email: 'csilla@test.com',
+        seller_name: 'Csilla'
+    },
+    { 
+        id: 19, 
+        url: booksImg,
+        alt: 'books', 
+        name: 'stuff2', 
+        description: 'Im selling my book collection for a penny' ,
+        price: 1,
+        tags: ['relax', 'books'],
+        phone: '+421444444444',
+        email: 'csilla@test.com',
+        seller_name: 'Csilla'
+    },
+    { 
+        id: 14, 
+        url: booksImg,
+        alt: 'books', 
+        name: 'stuff3', 
+        description: 'Im selling my book collection for a penny' ,
+        price: 1,
+        tags: ['relax', 'books'],
+        phone: '+421444444444',
+        email: 'csilla@test.com',
+        seller_name: 'Csilla'
+    },
   ];
   
   // Get unique tags from all products
@@ -58,6 +101,16 @@ function Productlist() {
   const filteredProducts = selectedTag === 'all' 
     ? products 
     : products.filter(product => product.tags.includes(selectedTag));
+
+  const { paginatedData, totalPages, currentPage } = usePagination({
+    data: filteredProducts,
+    itemsPerPage: 2,
+    currentPage: pageParam
+  });
+
+  const goToPage = (page) => {
+    setSearchParams({ page });
+  }
 
 
   return (
@@ -78,7 +131,7 @@ function Productlist() {
           </select>
         </div>
         <div className="product-list__container">
-          {filteredProducts.map((product) => (
+          {paginatedData.map((product) => (
             <Link 
               to={`/product/${product.id}`} 
               key={product.id}
@@ -96,6 +149,35 @@ function Productlist() {
           ))}
         </div>
       </div>
+      <nav
+        className="pagination"
+        aria-label="Product list pages"
+      >
+        <button
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage <= 1}
+        >
+          Previous
+        </button>
+
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => goToPage(i + 1)}
+            aria-current={currentPage === i + 1 ? 'page' : undefined}
+          >
+            {i + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+        >
+          Next
+        </button>
+      </nav>
+
+
       < Navigation variant="vertical" />
     </div>
   )
