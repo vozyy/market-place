@@ -3,7 +3,8 @@
         display: flex;
         justify-content: space-between;
         .product-list {
-            max-width: 80%;
+            max-width: 1440px;
+            width: 80%;
             margin: 0 auto;
             &__header {
                 place-self: end;
@@ -37,7 +38,8 @@
                 }
             }
             &__container {
-                display: flex;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
                 gap: 1rem;
             }
         }
