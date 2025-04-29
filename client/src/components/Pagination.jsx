@@ -1,7 +1,13 @@
 import React from 'react'
+import classNames from 'classnames';
 import './Pagination.scss'
 
-function Pagination({currentPage, totalPages, onChange}) {
+function Pagination({
+        currentPage,
+        totalPages,
+        onChange,
+        isPending = false
+    }) {
 
     if (totalPages <= 1) return null;
 
@@ -10,8 +16,8 @@ function Pagination({currentPage, totalPages, onChange}) {
             <button
                 onClick={() => onChange(currentPage - 1)}
                 disabled={currentPage <= 1}
-                aria-disabled={currentPage <= 1}
-                className='page-previous'
+                aria-disabled={isPending || currentPage <= 1}
+                className={classNames('page-previous', { pending: isPending })}
             >
                 Previous
             </button>
@@ -30,8 +36,8 @@ function Pagination({currentPage, totalPages, onChange}) {
             <button
                 onClick={() => onChange(currentPage + 1)}
                 disabled={currentPage >= totalPages}
-                aria-disabled={currentPage >= totalPages}
-                className='page-next'
+                aria-disabled={isPending || currentPage >= totalPages}
+                className={classNames('page-next', { pending: isPending })}
             >
                 Next
             </button>
