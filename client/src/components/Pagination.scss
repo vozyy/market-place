@@ -43,8 +43,10 @@
             opacity: 1;
         }
 
-        &[disabled] {
-            cursor: not-allowed;
+        &[disabled],
+        &.pending {
+            pointer-events: none;
+            cursor: default;
         }
     } 
 }
