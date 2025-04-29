@@ -7,6 +7,7 @@ import rugImg from '../assets/images/table_rug.jpg'
 import plantsImg from '../assets/images/plants.jpg'
 import booksImg from '../assets/images/books.jpg'
 import Navigation from '../components/Navigation'
+import Pagination from '../components/Pagination'
 
 function Productlist() {
 
@@ -112,7 +113,6 @@ function Productlist() {
     setSearchParams({ page });
   }
 
-
   return (
     <div className='page page--product-list'>
       <div className="product-list">
@@ -148,36 +148,12 @@ function Productlist() {
             </Link>
           ))}
         </div>
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onChange={goToPage}
+        />
       </div>
-      <nav
-        className="pagination"
-        aria-label="Product list pages"
-      >
-        <button
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage <= 1}
-        >
-          Previous
-        </button>
-
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i + 1}
-            onClick={() => goToPage(i + 1)}
-            aria-current={currentPage === i + 1 ? 'page' : undefined}
-          >
-            {i + 1}
-          </button>
-        ))}
-        <button
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-        >
-          Next
-        </button>
-      </nav>
-
-
       < Navigation variant="vertical" />
     </div>
   )
