@@ -1,0 +1,50 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    column-gap: 2rem;
+
+    div.pagination-pages {
+        display: flex;
+        column-gap: .7rem;
+    
+        .page {
+            &:not([aria-current="page"]):hover {
+                color: rgb(255, 165, 0, 0.6);
+            }
+            
+            &[aria-current="page"] {
+                width: 36px;
+                height: 36px;
+                background-color: orange;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .page-previous,
+    .page-next {
+        font-size: 18px;
+        position: relative;
+
+        &:not([aria-current="page"]):not([disabled])::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 0;
+            height: 10px;
+            background-color: rgb(255, 165, 0, 0.6);
+
+            transition: width 0.3s ease, opacity 0.3s ease;
+        } 
+
+        &:not([disabled]):hover::before {
+            width: 110%;
+            opacity: 1;
+        }
+
+        &[disabled] {
+            cursor: not-allowed;
+        }
+    } 
+}
