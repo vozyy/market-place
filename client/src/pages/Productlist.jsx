@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useTransition } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import usePagination from '../hooks/usePagination'
 import ProductCard from '../components/ProductCard'
@@ -14,6 +14,7 @@ function Productlist() {
   const [selectedTag, setSelectedTag] = useState('all');
   const [searchParams, setSearchParams] = useSearchParams();
   const pageParam = Number(searchParams.get('page') || 1);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     setSearchParams({ page: '1' });
@@ -110,7 +111,9 @@ function Productlist() {
   });
 
   const goToPage = (page) => {
-    setSearchParams({ page });
+    startTransition(() => {
+      setSearchParams({ page });
+    })
   }
 
   return (
@@ -152,6 +155,7 @@ function Productlist() {
           totalPages={totalPages}
           currentPage={currentPage}
           onChange={goToPage}
+          isPending={isPending}
         />
       </div>
       < Navigation variant="vertical" />
