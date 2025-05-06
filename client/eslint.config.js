@@ -16,6 +16,18 @@ export default [
         sourceType: 'module',
       },
     },
+    settings: {
+      'import/resolver': {
+        alias: {
+          map: [
+            ['@', './src'],
+            ['@shared', './src/shared'],
+            ['@features', './src/features'],
+          ],
+          extensions: ['.js', '.jsx', '.json'],
+        }
+      }
+    },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,

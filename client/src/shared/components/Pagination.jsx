@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames';
+// import '@shared/components/Pagination.scss'
 import './Pagination.scss'
 
 function Pagination({

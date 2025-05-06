@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom';
-import BackButton from '../components/BackButton';
+import BackButton from '@shared/components/BackButton'
 import './ProductDetail.scss'
 
 function ProductDetail() {

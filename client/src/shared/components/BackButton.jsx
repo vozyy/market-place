@@ -1,7 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import BackArrow from '../assets/icons/arrow_left.svg'
+import BackArrow from "@/assets/icons/arrow_left.svg";
+// import BackArrow from '../assets/icons/arrow_left.svg'
+// import '@shared/components/BackButton.scss'
 import './BackButton.scss'
 
 function BackButton({

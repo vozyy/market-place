@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useTransition } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import usePagination from '../hooks/usePagination'
-import ProductCard from '../components/ProductCard'
-import '../pages/Productlist.scss'
-import rugImg from '../assets/images/table_rug.jpg'
-import plantsImg from '../assets/images/plants.jpg'
-import booksImg from '../assets/images/books.jpg'
-import Navigation from '../components/Navigation'
-import Pagination from '../components/Pagination'
+import './Productlist.scss'
+import rugImg from '@assets/images/table_rug.jpg'
+import plantsImg from '@assets/images/plants.jpg'
+import booksImg from '@assets/images/books.jpg'
+import Pagination from '@shared/components/Pagination'
+import  Navigation from '@features/navigation/Navigation'
+import ProductCard from '@features/product/ProductCard'
+import usePagination from '@shared/hooks/usePagination.js'
 
 function Productlist() {
 
