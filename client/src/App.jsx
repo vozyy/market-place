@@ -1,17 +1,21 @@
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
-import Homepage from '@pages/HomePage'
-import Productlist from '@pages/Productlist'
-import ProductDetail from '@pages/ProductDetail'
+import { lazy, Suspense } from 'react';
+
+const HomePage = lazy(() => import('@pages/Homepage'));
+const Productlist = lazy(() => import('@pages/Productlist'));
+const ProductDetail = lazy(() => import('@pages/ProductDetail'));
 
 function App() {
   
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/productlist" element={<Productlist />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-      </Routes>
+      <Suspense fallback={<div>Loading the page...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/productlist" element={<Productlist />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }
