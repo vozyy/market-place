@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useTransition } from 'react'
+import React, { useTransition } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import './Productlist.scss'
 import rugImg from '@assets/images/table_rug.jpg'
@@ -11,15 +11,10 @@ import usePagination from '@shared/hooks/usePagination.js'
 
 function Productlist() {
 
-  const [selectedTag, setSelectedTag] = useState('all');
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageParam = Number(searchParams.get('page') || 1);
+  const selectedTag = searchParams.get('tag') ?? 'all';
+  const pageParam = Number(searchParams.get('page') ?? '1');
   const [isPending, startTransition] = useTransition();
-
-  useEffect(() => {
-    setSearchParams({ page: '1' });
-  }, [selectedTag]);
-
 
   const products = [
     { 
@@ -96,10 +91,8 @@ function Productlist() {
     },
   ];
   
-  // Get unique tags from all products
   const uniqueTags = ['all', ...new Set(products.flatMap(product => product.tags))];
 
-  // Filter products based on selected tag
   const filteredProducts = selectedTag === 'all' 
     ? products 
     : products.filter(product => product.tags.includes(selectedTag));
@@ -110,9 +103,16 @@ function Productlist() {
     currentPage: pageParam
   });
 
+  const handleTagChange = (e) => {
+    const newTag = e.target.value;
+    startTransition(() => {
+      setSearchParams({ tag: newTag, page: '1' });
+    })
+  }
+
   const goToPage = (page) => {
     startTransition(() => {
-      setSearchParams({ page });
+      setSearchParams({ tag: selectedTag, page: String(page) })
     })
   }
 
@@ -123,7 +123,7 @@ function Productlist() {
           <select 
             id="tag-filter"
             value={selectedTag}
-            onChange={(e) => setSelectedTag(e.target.value)}
+            onChange={handleTagChange}
             className="tag-select"
             >
             {uniqueTags.map(tag => (
