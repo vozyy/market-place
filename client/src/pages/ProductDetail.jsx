@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useState, useContext } from 'react'
+import { useLocation, Link } from 'react-router-dom';
 import BackButton from '@shared/components/BackButton'
 import './ProductDetail.scss'
 import { ListContext } from '../features/list/context/listContext';
@@ -13,7 +13,6 @@ function ProductDetail() {
   const { listItems, setListItems } = useContext(ListContext);
 
   const inList = listItems.some(item => item.id == product.id)
-  console.log(listItems);
 
   return (
     <div className="product-detail">
@@ -33,7 +32,6 @@ function ProductDetail() {
           >
             save to "myList"
           </button>
-          <button>see "myList"</button>
         </div>
         <div className='seller-detail'>
           <p>seller details:</p>
@@ -47,6 +45,18 @@ function ProductDetail() {
           </a>
         </div>
       </div>
+      {
+        listItems.length > 0 && 
+        <div className='product-detail__list'>
+          <Link
+            to={`/list`} 
+          >
+            <div className='count-wrapper'>
+              <span className='count'>{listItems.length}</span>
+            </div>
+          </Link>
+      </div>
+      }
     </div>
   )
 }
